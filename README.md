@@ -26,7 +26,11 @@ I tried my best to cover most of aspects in very limited time. But these things 
 	- Proper Service Discovery Mechanism
 
 #### Screenshots
-![Image1](https://github.com/imyounas/BFA.IY.App/blob/master/2.png)
-![Image2](https://github.com/imyounas/BFA.IY.App/blob/master/3.png)
-![Image3](https://github.com/imyounas/BFA.IY.App/blob/master/4.png)
-![Image4](https://github.com/imyounas/BFA.IY.App/blob/master/1.png)
+##### Screenshot 1
+![Screenshot1](https://github.com/imyounas/BFA.IY.App/blob/master/2.png)
+##### Screenshot 2
+![Screenshot2](https://github.com/imyounas/BFA.IY.App/blob/master/3.png)
+##### Screenshot 2
+![Screenshot3](https://github.com/imyounas/BFA.IY.App/blob/master/4.png)
+##### Screenshot 4
+![Screenshot4](https://github.com/imyounas/BFA.IY.App/blob/master/1.png)
