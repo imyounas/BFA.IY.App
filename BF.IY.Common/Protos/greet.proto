@@ -1,0 +1,131 @@
+syntax = "proto3";
+
+option csharp_namespace = "BF.IY.AuctionSystem";
+
+package auction;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+service Auctioner {
+  // Bidirectional communication stream between client and server
+  rpc MessageHub(stream ClientRequest) returns (stream ServerResponse);
+}
+
+message ClientRequest {
+  oneof request {
+	JoinAuction join_auction = 1;
+	LeaveAuctionRequest auction_leave_request = 2;
+	CreateAuctionRequest auction_create_request = 3;
+	BidRequest bid_request = 4;
+	BidAcceptedRequest bid_accepted_request = 5;
+	AuctionCloseRequest auction_close_request = 6;	
+  }
+}
+
+message JoinAuction {
+string client_id = 1;  
+string client_name = 2;
+}
+
+message LeaveAuctionRequest{
+  string client_id = 1;  
+  string client_name = 2;
+}
+
+message CreateAuctionRequest {
+  string client_id = 1;  
+  string client_name = 2;
+  string item_id = 3;
+  string item_name = 4;
+  double item_price = 5;
+  google.protobuf.Timestamp auction_created_time = 6;
+  string auction_name = 7;
+}
+
+message BidRequest {
+  string client_id = 1;  
+  string item_id = 2;
+  string item_name = 3;
+  double item_price = 4;
+  double bid_price = 5;
+  google.protobuf.Timestamp bid_request_time = 6;
+  string auction_name = 7;
+}
+
+message BidAcceptedRequest {
+	string client_id = 1;
+	string item_id = 2;
+	double accepted_price = 3;
+	bool accepted = 4;
+	string auction_name = 5;
+	google.protobuf.Timestamp bid_accepted_time = 6;
+}
+message AuctionCloseRequest {
+	string auction_name = 1;
+}
+
+message ServerResponse {
+  oneof response {
+	JoinAuctionResponse join_response = 1;
+	ClientJoinedAuctionBroadcast client_joined_broadcast = 2;
+	ClientLeftAuction client_left = 3;
+	AuctionCreatedResponse auction_created_response = 4;
+	BidReceivedResponse bid_response = 5;
+	BidAcceptedResponse bid_accepted_response = 6;
+	AuctionCloseResponse auction_close_response = 7;	
+  }
+}
+
+message JoinAuctionResponse {
+	bool joined = 1;
+	string client_id = 2;		
+	string status = 3;
+}
+message ClientJoinedAuctionBroadcast{
+	string client_id = 1;		
+	string client_Name = 2;		
+}
+
+message ClientLeftAuction {
+  string client_id = 1;
+  string client_Name = 2;	
+}
+
+message AuctionCreatedResponse {
+  string client_id = 1;  
+  string client_Name = 2;	
+  string item_id = 3;
+  string item_name = 4;
+  double item_price = 5;
+  string auction_name = 6;
+}
+
+message BidReceivedResponse {
+  string client_id = 1; 
+  string client_Name = 2;	
+  string item_id = 3;
+  string item_name = 5;
+  double item_price = 6;
+  double bid_price = 7;
+  google.protobuf.Timestamp bid_request_time = 8;
+  string auction_name = 9;
+}
+
+message BidAcceptedResponse {
+  string client_id = 1;  
+  string client_Name = 2;	
+  string item_id = 3;
+  string item_name = 4;
+  double accepted_bid_price = 5;
+  string winnder_client_Id = 6;
+  string winnder_client_name = 7;
+  string auction_name = 8;
+  google.protobuf.Timestamp bid_accepted_time = 9;
+
+}
+
+message AuctionCloseResponse {
+	string auction_name = 1;
+}
